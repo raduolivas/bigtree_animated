@@ -1,18 +1,55 @@
-import type { ReactNode } from 'react';
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
-import { BigTreeScene } from '../three/BigTreeScene';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
+import '../three/BigTreeScene.css';
+
+const BigTreeScene = lazy(() => import('../three/BigTreeScene'));
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+  const reducedMotion = useReducedMotion();
+  const [mountScene, setMountScene] = useState(false);
+
+  useEffect(() => {
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean; effectiveType?: string };
+    }).connection;
+    const lightweight = reducedMotion || connection?.saveData === true ||
+      connection?.effectiveType === '2g';
+
+    if (lightweight) return;
+
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    const idleId = idleWindow.requestIdleCallback
+      ? idleWindow.requestIdleCallback(() => setMountScene(true), { timeout: 1400 })
+      : globalThis.setTimeout(() => setMountScene(true), 500);
+
+    return () => {
+      if (idleWindow.cancelIdleCallback) idleWindow.cancelIdleCallback(idleId);
+      else globalThis.clearTimeout(idleId);
+    };
+  }, [reducedMotion]);
+
   return (
     <>
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <Navbar />
-      <BigTreeScene />
-      <main>{children}</main>
+      <div className="tree-scene tree-scene--fallback" aria-hidden="true">
+        <div className="tree-scene__poster"><div className="tree-scene__silhouette" /></div>
+      </div>
+      {mountScene && (
+        <Suspense fallback={null}>
+          <BigTreeScene />
+        </Suspense>
+      )}
+      <main id="main-content" tabIndex={-1}>{children}</main>
       <Footer />
     </>
   );

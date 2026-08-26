@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import './variables.css';
 
 *,
@@ -42,6 +41,9 @@ body {
   color: var(--color-text);
   background-color: var(--color-bg);
   overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 15% 12%, rgba(63, 114, 83, 0.09), transparent 28%),
+    linear-gradient(180deg, var(--color-bg), #09130e 48%, var(--color-bg));
 }
 
 a {
@@ -102,7 +104,7 @@ select {
   width: 100%;
   max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 clamp(var(--space-5), 4vw, var(--space-10));
 }
 
 @media (max-width: 768px) {
@@ -122,3 +124,20 @@ select {
   white-space: nowrap;
   border-width: 0;
 }
+
+.skip-link {
+  position: fixed;
+  left: var(--space-4);
+  top: var(--space-4);
+  z-index: calc(var(--z-nav) + 1);
+  padding: var(--space-3) var(--space-5);
+  color: #08100c;
+  background: var(--color-cyber);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-weight: var(--weight-semibold);
+  transform: translateY(calc(-100% - var(--space-6)));
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.skip-link:focus { transform: translateY(0); }

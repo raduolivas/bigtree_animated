@@ -2,6 +2,8 @@ import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { getParticleCount, type GPUTier } from '../../utils/deviceDetect';
+import { useTreeState } from '../../hooks/useTreeState';
+import { computeTreeGrowth } from '../../animations/TreeGrowthController';
 
 interface TreeParticlesProps {
   gpuTier: GPUTier;
@@ -10,7 +12,10 @@ interface TreeParticlesProps {
 
 export function TreeParticles({ gpuTier, mobile }: TreeParticlesProps) {
   const count = useMemo(() => getParticleCount(gpuTier, mobile), [gpuTier, mobile]);
+  const { scrollProgress } = useTreeState();
+  const { particleIntensity, networkProgress } = useMemo(() => computeTreeGrowth(scrollProgress), [scrollProgress]);
   const pointsRef = useRef<THREE.Points>(null);
+  const materialRef = useRef<THREE.PointsMaterial>(null);
 
   const [positions, colors] = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -37,10 +42,12 @@ export function TreeParticles({ gpuTier, mobile }: TreeParticlesProps) {
     return [pos, col];
   }, [count]);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y += delta * 0.02;
+      pointsRef.current.rotation.y += delta * (0.012 + networkProgress * 0.045);
+      pointsRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.22) * 0.12;
     }
+    if (materialRef.current) materialRef.current.opacity = 0.18 + particleIntensity * 0.48;
   });
 
   return (
@@ -56,10 +63,11 @@ export function TreeParticles({ gpuTier, mobile }: TreeParticlesProps) {
         />
       </bufferGeometry>
       <pointsMaterial
+        ref={materialRef}
         size={0.05}
         vertexColors
         transparent
-        opacity={0.6}
+        opacity={0.24}
         blending={THREE.AdditiveBlending}
       />
     </points>

@@ -1,7 +1,9 @@
 # Tree and Texture Assets
 
-Place your realistic GLB/GLTF tree model at:
-`public/models/tree/tree.glb`
+The production tree is stored at `public/model/tree/tree-v2.glb`.
+
+It is optimized for web delivery with Meshopt geometry compression and embedded
+2048px WebP textures. The original source remains recoverable from Git history.
 
 If your model uses external PBR textures (bark and leaves), place them under:
 `public/textures/tree/`

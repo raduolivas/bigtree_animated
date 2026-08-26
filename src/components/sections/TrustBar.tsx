@@ -15,6 +15,7 @@ export function TrustBar() {
             </span>
           ))}
         </div>
+        <p className="trust-bar__disclaimer">Professional experience reference only; organization names do not imply endorsement or partnership.</p>
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 .footer {
   position: relative;
   z-index: var(--z-content);
-  background: var(--color-secondary-dark);
+  background: #060c09;
   border-top: 1px solid var(--color-border);
   padding: var(--space-16) 0 var(--space-8);
 }
@@ -17,6 +17,8 @@
   font-size: var(--text-xl);
   font-weight: var(--weight-bold);
   margin-bottom: var(--space-4);
+  font-family: var(--font-display);
+  font-weight: var(--weight-regular);
 }
 
 .footer__brand-description {
@@ -37,6 +39,7 @@
 }
 
 .footer__column-title {
+  font-family: var(--font-mono);
   font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
   letter-spacing: var(--tracking-wide);
@@ -74,6 +77,13 @@
   color: var(--color-text-subtle);
 }
 
+.footer__privacy {
+  max-width: 420px;
+  color: var(--color-text-subtle);
+  font-size: var(--text-xs);
+  text-align: right;
+}
+
 .footer__legal {
   display: flex;
   gap: var(--space-6);
@@ -90,4 +100,6 @@
     gap: var(--space-4);
     text-align: center;
   }
+
+  .footer__privacy { text-align: center; }
 }

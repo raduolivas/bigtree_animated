@@ -12,6 +12,7 @@ export function TreeFruit() {
   const fruitRefs = useRef<{ [key: string]: THREE.Mesh }>({});
 
   const fruitPositions = useMemo(() => {
+    const palette = ['#74f7a1', '#d6a85f', '#72d5ff', '#a98bff', '#f0c777'];
     return services.map((s, idx) => {
       const angle = (idx / services.length) * Math.PI * 2;
       const radius = 2.4 + (idx % 3) * 0.3;
@@ -19,14 +20,14 @@ export function TreeFruit() {
       return {
         id: s.id,
         pos: [Math.cos(angle) * radius, height, Math.sin(angle) * radius] as [number, number, number],
-        color: s.accent.includes('#') ? s.accent : '#3b82f6',
+        color: palette[idx % palette.length],
       };
     });
   }, []);
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += delta * 0.04;
+      groupRef.current.rotation.y += delta * (0.018 + fruitsProgress * 0.028);
       groupRef.current.scale.setScalar(fruitsProgress);
     }
 
@@ -41,7 +42,7 @@ export function TreeFruit() {
 
         const material = mesh.material as THREE.MeshPhysicalMaterial;
         if (material) {
-          const targetEmissive = isHovered ? 2.0 : 0.4 + Math.sin(time * 3) * 0.1;
+          const targetEmissive = isHovered ? 2.0 : 0.28 + fruitsProgress * 0.32 + Math.sin(time * 3) * 0.08;
           material.emissiveIntensity = THREE.MathUtils.lerp(material.emissiveIntensity, targetEmissive, 0.1);
         }
       }

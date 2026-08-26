@@ -8,31 +8,31 @@ export const capabilities: TechCapability[] = [
   {
     id: 'cloud-architecture',
     title: 'Cloud Architecture',
-    description: 'Designing scalable, resilient systems on Azure, AWS, and GCP.',
+    description: 'A stable foundation that scales with demand without forcing an expensive rebuild.',
   },
   {
     id: 'cicd',
     title: 'CI/CD Pipelines',
-    description: 'Automated build, test, and deployment workflows that ship code safely.',
+    description: 'Safer, repeatable releases that reduce downtime and get improvements to users faster.',
   },
   {
     id: 'observability',
     title: 'Observability',
-    description: 'Monitoring, logging, and alerting so you always know how your systems perform.',
+    description: 'Clear visibility into performance and problems before customers need to report them.',
   },
   {
     id: 'security-by-design',
     title: 'Security by Design',
-    description: 'Baking security into every layer from day one, not bolting it on later.',
+    description: 'Protection designed into every layer from the beginning, not added after an incident.',
   },
   {
     id: 'iac',
     title: 'Infrastructure as Code',
-    description: 'Reproducible, version-controlled infrastructure with Terraform and Pulumi.',
+    description: 'Consistent environments that can be reviewed, recovered, and changed with confidence.',
   },
   {
     id: 'performance',
     title: 'Performance Tuning',
-    description: 'Optimizing response times, throughput, and resource utilization.',
+    description: 'Faster experiences, more efficient infrastructure, and fewer customers lost to delays.',
   },
 ];

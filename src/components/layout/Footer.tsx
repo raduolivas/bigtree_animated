@@ -45,11 +45,13 @@ export function Footer() {
               <li>
                 <a href={`mailto:${footer.email}`} className="footer__link">{footer.email}</a>
               </li>
-              <li>
-                <a href={footer.social.linkedin} className="footer__link" target="_blank" rel="noopener noreferrer">
-                  LinkedIn
-                </a>
-              </li>
+              {footer.social.linkedin !== '#' && (
+                <li>
+                  <a href={footer.social.linkedin} className="footer__link" target="_blank" rel="noopener noreferrer">
+                    LinkedIn
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -58,10 +60,7 @@ export function Footer() {
           <p className="footer__copyright">
             &copy; {currentYear} {brand.name}. All rights reserved.
           </p>
-          <div className="footer__legal">
-            <a href="#" className="footer__link">Privacy Policy</a>
-            <a href="#" className="footer__link">Terms of Service</a>
-          </div>
+          <p className="footer__privacy">Enquiry details are used only to respond to your request.</p>
         </div>
       </div>
     </footer>

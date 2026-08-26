@@ -7,8 +7,133 @@
   z-index: var(--z-tree);
   background: var(--color-bg);
   pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-canvas {
+.tree-scene__poster {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 42%, rgba(61, 112, 79, 0.2), transparent 32%),
+    radial-gradient(circle at 78% 78%, rgba(59, 130, 246, 0.08), transparent 26%),
+    linear-gradient(115deg, #0a0f0d 25%, #0d1712 68%, #09100d 100%);
+  opacity: 1;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.tree-scene__poster::before,
+.tree-scene__poster::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.tree-scene__poster::before {
+  width: min(52vw, 760px);
+  aspect-ratio: 1;
+  right: -5vw;
+  top: 8vh;
+  background: radial-gradient(circle, rgba(48, 91, 61, 0.28), rgba(20, 45, 30, 0.12) 48%, transparent 72%);
+}
+
+.tree-scene__poster::after {
+  width: 38vw;
+  height: 1px;
+  right: 7vw;
+  bottom: 13vh;
+  background: linear-gradient(90deg, transparent, rgba(116, 159, 126, 0.34), transparent);
+  box-shadow: 0 0 32px 8px rgba(48, 91, 61, 0.12);
+}
+
+.tree-scene__silhouette {
+  position: absolute;
+  width: clamp(220px, 31vw, 480px);
+  height: clamp(360px, 68vh, 700px);
+  right: clamp(-80px, 5vw, 110px);
+  bottom: -8vh;
+  opacity: 0.42;
+  background:
+    radial-gradient(ellipse at 48% 19%, #264f34 0 16%, transparent 17%),
+    radial-gradient(ellipse at 27% 31%, #20452d 0 17%, transparent 18%),
+    radial-gradient(ellipse at 70% 33%, #2b5739 0 19%, transparent 20%),
+    radial-gradient(ellipse at 48% 42%, #1c3d28 0 23%, transparent 24%),
+    linear-gradient(88deg, transparent 45%, #173222 46% 54%, transparent 55%);
+  filter: drop-shadow(0 0 45px rgba(60, 116, 78, 0.22));
+}
+
+.tree-scene__canvas {
+  opacity: 0 !important;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.tree-scene__phase {
+  position: absolute;
+  right: clamp(var(--space-5), 4vw, var(--space-12));
+  bottom: clamp(var(--space-6), 6vh, var(--space-16));
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  opacity: 0;
+  transition: opacity 700ms var(--ease-out);
+}
+
+.tree-scene--ready .tree-scene__phase { opacity: 0.62; }
+
+.tree-scene__phase-number {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 24px;
+  color: #08100c;
+  background: var(--color-cyber);
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+}
+
+.tree-scene__phase-name {
+  color: var(--color-cyber);
+  text-shadow: 0 0 12px var(--color-cyber-glow);
+}
+
+.tree-scene--ready .tree-scene__canvas {
+  opacity: 0.9 !important;
+}
+
+.tree-scene--ready .tree-scene__poster {
+  opacity: 0;
+}
+
+.tree-scene canvas {
   touch-action: none;
+}
+
+@media (max-width: 768px) {
+  .tree-scene__silhouette {
+    right: -110px;
+    opacity: 0.25;
+  }
+
+  .tree-scene__poster::before {
+    width: 86vw;
+    right: -38vw;
+  }
+
+  .tree-scene__phase {
+    right: var(--space-4);
+    bottom: var(--space-5);
+    transform: scale(0.88);
+    transform-origin: right bottom;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tree-scene__poster,
+  .tree-scene__canvas {
+    transition: none;
+  }
 }
