@@ -27,6 +27,11 @@ export function Hero() {
             {hero.secondaryCta}
           </Button>
         </div>
+        <p className="hero__reassurance" aria-label="Growth call details">
+          <span>30 minutes</span>
+          <span>Senior specialist</span>
+          <span>No obligation</span>
+        </p>
       </div>
       <ScrollIndicator label={hero.scrollIndicator} />
     </section>

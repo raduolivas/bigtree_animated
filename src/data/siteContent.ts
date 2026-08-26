@@ -92,6 +92,23 @@ export const siteContent = {
     title: 'Bring Us the Business Problem.',
     description:
       'Tell us what is costing you time, customers, or confidence. We will help you clarify the opportunity and identify a sensible next step—without a sales presentation or technical jargon.',
+    nextSteps: [
+      {
+        step: '01',
+        title: 'We review your situation',
+        description: 'A senior consultant reads your message and prepares the right questions.',
+      },
+      {
+        step: '02',
+        title: 'We talk for 30 minutes',
+        description: 'A focused, jargon-free conversation about the problem and business impact.',
+      },
+      {
+        step: '03',
+        title: 'You leave with clarity',
+        description: 'We recommend a sensible next move—even when that does not involve us.',
+      },
+    ],
     success: {
       title: 'Thank You!',
       description:

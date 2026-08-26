@@ -79,6 +79,32 @@
   margin-top: var(--space-4);
 }
 
+.hero__reassurance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  color: rgba(226, 238, 229, 0.78);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.hero__reassurance span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hero__reassurance span::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-cyber);
+  box-shadow: 0 0 10px var(--color-cyber-glow);
+}
+
 .hero__glass-cta.btn--secondary {
   color: rgba(255, 255, 255, 0.94);
   background:

@@ -67,8 +67,35 @@ export function Contact() {
             description={contact.description}
           />
 
+          <div className="contact__promise" aria-label="Consultation promise">
+            <span>Free 30-minute conversation</span>
+            <span>Reply within one business day</span>
+            <span>No sales pressure</span>
+          </div>
+
           {submissionState !== 'sent' && submissionState !== 'email' ? (
-            <form className="contact__form" onSubmit={handleSubmit}>
+            <div className="contact__conversion-grid">
+              <aside className="contact__next" aria-labelledby="contact-next-title">
+                <p className="contact__next-kicker">What happens next</p>
+                <h3 id="contact-next-title" className="contact__next-title">A useful conversation from the first call.</h3>
+                <ol className="contact__steps">
+                  {contact.nextSteps.map((item) => (
+                    <li key={item.step} className="contact__step">
+                      <span className="contact__step-number">{item.step}</span>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <p>{item.description}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <div className="contact__direct">
+                  <span>Prefer email?</span>
+                  <a href={`mailto:${siteContent.footer.email}`}>{siteContent.footer.email}</a>
+                </div>
+              </aside>
+
+              <form className="contact__form" onSubmit={handleSubmit} aria-label="Request a growth call">
               <div className="contact__field">
                 <label htmlFor="name" className="contact__label">Full Name</label>
                 <input
@@ -121,11 +148,16 @@ export function Contact() {
                   name="brief"
                   rows={4}
                   required
+                  maxLength={1200}
+                  aria-describedby="brief-hint"
                   className="contact__input contact__textarea"
                   placeholder="Tell us about your project or goals..."
                   value={formData.brief}
                   onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
                 />
+                <span id="brief-hint" className="contact__field-hint">
+                  A few sentences are enough · {formData.brief.length}/1200
+                </span>
               </div>
 
               <div className="contact__checkbox-field">
@@ -150,7 +182,9 @@ export function Contact() {
               <Button type="submit" variant="primary" size="lg" disabled={submissionState === 'submitting'}>
                 {submissionState === 'submitting' ? 'Sending…' : 'Request My Growth Call'}
               </Button>
-            </form>
+              <p className="contact__submit-note">No commitment. No technical preparation needed.</p>
+              </form>
+            </div>
           ) : (
             <div className="contact__success" role="status">
               <h3 className="contact__success-title">
