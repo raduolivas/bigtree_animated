@@ -1,6 +1,6 @@
-import { Component, Suspense, useEffect, useMemo, useState, type ErrorInfo, type ReactNode } from 'react';
+import { Component, Suspense, useEffect, useMemo, useState, type CSSProperties, type ErrorInfo, type ReactNode } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, ContactShadows, useProgress } from '@react-three/drei';
+import { ContactShadows, useProgress } from '@react-three/drei';
 import { detectGPUTier, isMobile } from '../../utils/deviceDetect';
 import { TreeModel } from './TreeModel';
 import { TreeFruit } from './TreeFruit';
@@ -48,12 +48,13 @@ class SceneErrorBoundary extends Component<SceneErrorBoundaryProps, SceneErrorBo
   }
 }
 
-function SceneLoadingStatus({ onReady }: { onReady: () => void }) {
+function SceneLoadingStatus({ onReady, onProgress }: { onReady: () => void; onProgress: (progress: number) => void }) {
   const { active, progress } = useProgress();
 
   useEffect(() => {
+    onProgress(progress);
     if (!active && progress >= 100) onReady();
-  }, [active, onReady, progress]);
+  }, [active, onProgress, onReady, progress]);
 
   return null;
 }
@@ -63,8 +64,16 @@ export function BigTreeScene() {
   const mobile = useMemo(() => isMobile(), []);
   const [sceneReady, setSceneReady] = useState(false);
   const [sceneFailed, setSceneFailed] = useState(false);
+  const [loadProgress, setLoadProgress] = useState(0);
+  const [pageVisible, setPageVisible] = useState(() => document.visibilityState !== 'hidden');
   const { treePhase } = useTreeState();
   const [phaseNumber, phaseName] = phaseLabels[treePhase];
+
+  useEffect(() => {
+    const handleVisibility = () => setPageVisible(document.visibilityState !== 'hidden');
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
 
   return (
     <div
@@ -74,6 +83,14 @@ export function BigTreeScene() {
       <div className="tree-scene__poster">
         <div className="tree-scene__silhouette" />
       </div>
+
+      {!sceneReady && !sceneFailed && (
+        <div className="tree-scene__loading">
+          <span>Growing digital ecosystem</span>
+          <span>{Math.round(loadProgress).toString().padStart(2, '0')}%</span>
+          <i style={{ '--tree-load': `${loadProgress}%` } as CSSProperties} />
+        </div>
+      )}
 
       <div className="tree-scene__phase">
         <span className="tree-scene__phase-number">{phaseNumber}</span>
@@ -86,7 +103,7 @@ export function BigTreeScene() {
             className="tree-scene__canvas"
             shadows={gpuTier === 'high'}
             dpr={[1, gpuTier === 'high' ? 1.5 : 1.25]}
-            frameloop="always"
+            frameloop={pageVisible ? 'always' : 'never'}
             gl={{
               antialias: gpuTier === 'high',
               alpha: true,
@@ -98,14 +115,13 @@ export function BigTreeScene() {
             camera={{ position: [0, 2, 10], fov: 45 }}
           >
             <Suspense fallback={null}>
-              <SceneLoadingStatus onReady={() => setSceneReady(true)} />
+              <SceneLoadingStatus onReady={() => setSceneReady(true)} onProgress={setLoadProgress} />
               <TreeLighting />
               <TreeCamera />
               <TreeRoots />
               <TreeModel />
               <TreeFruit />
               <TreeParticles gpuTier={gpuTier} mobile={mobile} />
-              <Environment preset="city" blur={0.8} />
               {gpuTier === 'high' && (
                 <ContactShadows
                   position={[0, -0.9, 0]}

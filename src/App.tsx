@@ -15,6 +15,10 @@ function App() {
   useScrollProgress();
 
   useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
+    const context = gsap.context(() => {
     // Reveal animations for sections
     const sections = document.querySelectorAll('.section');
     
@@ -33,7 +37,8 @@ function App() {
             scrollTrigger: {
               trigger: heading,
               start: 'top 85%',
-              toggleActions: 'play none none reverse'
+              toggleActions: 'play none none none',
+              once: true,
             }
           }
         );
@@ -51,12 +56,16 @@ function App() {
             scrollTrigger: {
               trigger: content,
               start: 'top 90%',
-              toggleActions: 'play none none reverse'
+              toggleActions: 'play none none none',
+              once: true,
             }
           }
         );
       }
     });
+    });
+
+    return () => context.revert();
   }, []);
 
   return (

@@ -30,8 +30,8 @@ export function TreeRoots() {
   return (
     <group position={[0, -1, 0]}>
       {rootCurves.map((curve, i) => (
-        <mesh key={i}>
-          <tubeGeometry args={[curve, 20, 0.25 * rootsProgress, 8, false]} />
+        <mesh key={i} scale={Math.max(rootsProgress, 0.001)}>
+          <tubeGeometry args={[curve, 20, 0.25, 8, false]} />
           <meshStandardMaterial
             color="#12241b"
             roughness={0.9}

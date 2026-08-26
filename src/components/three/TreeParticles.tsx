@@ -69,6 +69,7 @@ export function TreeParticles({ gpuTier, mobile }: TreeParticlesProps) {
         transparent
         opacity={0.24}
         blending={THREE.AdditiveBlending}
+        depthWrite={false}
       />
     </points>
   );

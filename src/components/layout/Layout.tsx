@@ -23,17 +23,25 @@ export function Layout({ children }: LayoutProps) {
 
     if (lightweight) return;
 
+    const modelPreload = document.createElement('link');
+    modelPreload.rel = 'preload';
+    modelPreload.as = 'fetch';
+    modelPreload.href = '/model/tree/tree-v2.glb';
+    modelPreload.crossOrigin = 'anonymous';
+    document.head.appendChild(modelPreload);
+
     const idleWindow = window as Window & {
       requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
       cancelIdleCallback?: (id: number) => void;
     };
     const idleId = idleWindow.requestIdleCallback
-      ? idleWindow.requestIdleCallback(() => setMountScene(true), { timeout: 1400 })
-      : globalThis.setTimeout(() => setMountScene(true), 500);
+      ? idleWindow.requestIdleCallback(() => setMountScene(true), { timeout: 700 })
+      : globalThis.setTimeout(() => setMountScene(true), 350);
 
     return () => {
       if (idleWindow.cancelIdleCallback) idleWindow.cancelIdleCallback(idleId);
       else globalThis.clearTimeout(idleId);
+      modelPreload.remove();
     };
   }, [reducedMotion]);
 

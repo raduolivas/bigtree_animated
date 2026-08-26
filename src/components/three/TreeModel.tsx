@@ -15,11 +15,11 @@ export function TreeModel() {
   const gltfScene = useMemo(() => scene.clone(), [scene]);
   useMemo(() => {
     if (gltfScene) {
-      gltfScene.traverse((node: any) => {
+      gltfScene.traverse((node) => {
         if (node instanceof THREE.Mesh) {
           node.castShadow = true;
           node.receiveShadow = true;
-          
+          node.frustumCulled = true;
         }
       });
     }
