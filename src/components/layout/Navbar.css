@@ -47,7 +47,7 @@
 .navbar__links {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: clamp(var(--space-3), 2vw, var(--space-8));
 }
 
 .navbar__link {

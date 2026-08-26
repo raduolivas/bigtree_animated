@@ -10,6 +10,7 @@ export const siteContent = {
       { label: 'Services', href: '#services' },
       { label: 'BTT Advantage', href: '#btt-advantage' },
       { label: 'BTT Method', href: '#btt-method' },
+      { label: 'FAQ', href: '#faq' },
       { label: 'Contact', href: '#contact' },
     ],
   },

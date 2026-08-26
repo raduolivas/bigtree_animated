@@ -24,7 +24,7 @@ function App() {
     
     sections.forEach((section) => {
       const heading = section.querySelector('.section-heading');
-      const content = section.querySelector('.services__grid, .advantage__grid, .technology__grid, .method__timeline, .contact__wrapper, .vision__content');
+      const content = section.querySelector('.services__grid, .advantage__grid, .technology__grid, .method__timeline, .faq__layout, .contact__wrapper, .vision__content');
       
       if (heading) {
         gsap.fromTo(heading, 

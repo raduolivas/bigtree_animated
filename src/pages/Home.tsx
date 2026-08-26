@@ -5,6 +5,7 @@ import { BTTAdvantage } from '../components/sections/BTTAdvantage';
 import { Technology } from '../components/sections/Technology';
 import { BTTMethod } from '../components/sections/BTTMethod';
 import { VisionCard } from '../components/sections/VisionCard';
+import { FAQ } from '../components/sections/FAQ';
 import { Contact } from '../components/sections/Contact';
 
 export function Home() {
@@ -17,6 +18,7 @@ export function Home() {
       <Technology />
       <BTTMethod />
       <VisionCard />
+      <FAQ />
       <Contact />
     </>
   );
