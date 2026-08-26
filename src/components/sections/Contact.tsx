@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { siteContent } from '../../data/siteContent';
 import { services } from '../../data/services';
 import { SectionHeading } from '../ui/SectionHeading';
@@ -17,6 +17,20 @@ export function Contact() {
     brief: '',
     urgent: false,
   });
+
+  useEffect(() => {
+    const handleOpportunity = (event: Event) => {
+      const selection = (event as CustomEvent<{ service: string; brief: string }>).detail;
+      setFormData((current) => ({
+        ...current,
+        service: selection.service,
+        brief: current.brief || selection.brief,
+      }));
+    };
+
+    window.addEventListener('btt:opportunity-selected', handleOpportunity);
+    return () => window.removeEventListener('btt:opportunity-selected', handleOpportunity);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

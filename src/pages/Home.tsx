@@ -1,5 +1,6 @@
 import { Hero } from '../components/sections/Hero';
 import { TrustBar } from '../components/sections/TrustBar';
+import { OpportunityFinder } from '../components/sections/OpportunityFinder';
 import { Services } from '../components/sections/Services';
 import { BTTAdvantage } from '../components/sections/BTTAdvantage';
 import { Technology } from '../components/sections/Technology';
@@ -13,6 +14,7 @@ export function Home() {
     <>
       <Hero />
       <TrustBar />
+      <OpportunityFinder />
       <Services />
       <BTTAdvantage />
       <Technology />
