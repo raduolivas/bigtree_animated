@@ -133,7 +133,7 @@ export const siteContent = {
       { label: 'The BTT Method', href: '#btt-method' },
       { label: 'Contact Us', href: '#contact' },
     ],
-    email: 'info@bttconsulting.com',
+    email: 'contact@bigtreetech.it',
     social: {
       linkedin: '#',
     },
