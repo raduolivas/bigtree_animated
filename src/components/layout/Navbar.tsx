@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { siteContent } from '../../data/siteContent';
 import { useScrollStore } from '../../stores/scrollStore';
 import './Navbar.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function Navbar() {
+  const { language, setLanguage, t } = useLanguage();
+  const content = translateData(siteContent, t);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const scrollY = useScrollStore((s) => s.scrollY);
@@ -32,10 +35,10 @@ export function Navbar() {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} aria-label="Main navigation">
+    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} aria-label={t('Main navigation')}>
       <div className="navbar__inner container">
         <a href="#home" className="navbar__brand" onClick={(e) => handleNavClick(e, '#home')}>
-          {siteContent.brand.name}
+          {content.brand.name}
         </a>
 
         <button
@@ -43,7 +46,7 @@ export function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-expanded={menuOpen}
           aria-controls="main-navigation-links"
-          aria-label="Toggle navigation menu"
+          aria-label={t('Toggle navigation menu')}
         >
           <span className="navbar__toggle-line" />
           <span className="navbar__toggle-line" />
@@ -51,7 +54,7 @@ export function Navbar() {
         </button>
 
         <ul id="main-navigation-links" className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
-          {siteContent.nav.links.map((link) => (
+          {content.nav.links.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
@@ -62,6 +65,11 @@ export function Navbar() {
               </a>
             </li>
           ))}
+          <li className="navbar__language" aria-label={language === 'nl' ? 'Taal kiezen' : 'Choose language'}>
+            <button type="button" className={language === 'en' ? 'is-active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button>
+            <span>/</span>
+            <button type="button" className={language === 'nl' ? 'is-active' : ''} onClick={() => setLanguage('nl')} aria-pressed={language === 'nl'}>NL</button>
+          </li>
         </ul>
       </div>
     </nav>

@@ -3,9 +3,11 @@ import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { ScrollIndicator } from '../ui/ScrollIndicator';
 import './Hero.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function Hero() {
-  const { hero } = siteContent;
+  const { t } = useLanguage();
+  const { hero } = translateData(siteContent, t);
 
   const scrollToSection = (id: string) => {
     const target = document.querySelector(id);
@@ -27,10 +29,10 @@ export function Hero() {
             {hero.secondaryCta}
           </Button>
         </div>
-        <p className="hero__reassurance" aria-label="Growth call details">
-          <span>30 minutes</span>
-          <span>Senior specialist</span>
-          <span>No obligation</span>
+        <p className="hero__reassurance" aria-label={t('Growth call details')}>
+          <span>{t('30 minutes')}</span>
+          <span>{t('Senior specialist')}</span>
+          <span>{t('No obligation')}</span>
         </p>
       </div>
       <ScrollIndicator label={hero.scrollIndicator} />

@@ -78,6 +78,10 @@
   transform: scaleX(1);
 }
 
+.navbar__language { display: flex; align-items: center; gap: 0.3rem; padding-left: 0.35rem; color: var(--color-text-muted); font-family: var(--font-mono); font-size: 0.75rem; }
+.navbar__language button { border: 0; background: transparent; color: inherit; padding: 0.35rem 0.2rem; cursor: pointer; font: inherit; letter-spacing: 0.08em; }
+.navbar__language button.is-active { color: var(--color-cyber); text-shadow: 0 0 12px rgba(80, 255, 160, 0.55); }
+
 .navbar__toggle {
   display: none;
   flex-direction: column;

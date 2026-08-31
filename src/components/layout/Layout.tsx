@@ -3,6 +3,7 @@ import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import '../three/BigTreeScene.css';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 const BigTreeScene = lazy(() => import('../three/BigTreeScene'));
 
@@ -11,6 +12,7 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { t } = useLanguage();
   const reducedMotion = useReducedMotion();
   const [mountScene, setMountScene] = useState(false);
 
@@ -47,7 +49,7 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <a className="skip-link" href="#main-content">{t('Skip to main content')}</a>
       <Navbar />
       <div className="tree-scene tree-scene--fallback" aria-hidden="true">
         <div className="tree-scene__poster"><div className="tree-scene__silhouette" /></div>

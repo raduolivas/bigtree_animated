@@ -1,8 +1,10 @@
 import { siteContent } from '../../data/siteContent';
 import './Footer.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function Footer() {
-  const { footer, brand } = siteContent;
+  const { t } = useLanguage();
+  const { footer, brand } = translateData(siteContent, t);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,12 +15,12 @@ export function Footer() {
             <h3 className="footer__brand-name">{brand.name}</h3>
             <p className="footer__brand-description">{footer.description}</p>
             <p className="footer__headquarters">
-              <span className="footer__label">Headquarters:</span> {footer.headquarters}
+              <span className="footer__label">{t('Headquarters:')}</span> {footer.headquarters}
             </p>
           </div>
 
           <div className="footer__column">
-            <h4 className="footer__column-title">Services</h4>
+            <h4 className="footer__column-title">{t('Services')}</h4>
             <ul className="footer__list">
               {footer.serviceLinks.map((service) => (
                 <li key={service}>
@@ -29,7 +31,7 @@ export function Footer() {
           </div>
 
           <div className="footer__column">
-            <h4 className="footer__column-title">Company</h4>
+            <h4 className="footer__column-title">{t('Company')}</h4>
             <ul className="footer__list">
               {footer.companyLinks.map((link) => (
                 <li key={link.label}>
@@ -40,7 +42,7 @@ export function Footer() {
           </div>
 
           <div className="footer__column">
-            <h4 className="footer__column-title">Connect</h4>
+            <h4 className="footer__column-title">{t('Connect')}</h4>
             <ul className="footer__list">
               <li>
                 <a href={`mailto:${footer.email}`} className="footer__link">{footer.email}</a>
@@ -58,9 +60,9 @@ export function Footer() {
 
         <div className="footer__bottom">
           <p className="footer__copyright">
-            &copy; {currentYear} {brand.name}. All rights reserved.
+            &copy; {currentYear} {brand.name}. {t('All rights reserved.')}
           </p>
-          <p className="footer__privacy">Enquiry details are used only to respond to your request.</p>
+          <p className="footer__privacy">{t('Enquiry details are used only to respond to your request.')}</p>
         </div>
       </div>
     </footer>

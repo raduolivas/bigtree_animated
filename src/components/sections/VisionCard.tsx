@@ -1,8 +1,10 @@
 import { siteContent } from '../../data/siteContent';
 import './VisionCard.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function VisionCard() {
-  const { vision } = siteContent;
+  const { t } = useLanguage();
+  const { vision } = translateData(siteContent, t);
 
   return (
     <section className="section section--compact vision-card">

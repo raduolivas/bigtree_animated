@@ -3,9 +3,12 @@ import { services } from '../../data/services';
 import { SectionHeading } from '../ui/SectionHeading';
 import { ServiceCard } from './ServiceCard';
 import './Services.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function Services() {
-  const { services: servicesCopy } = siteContent;
+  const { t } = useLanguage();
+  const { services: servicesCopy } = translateData(siteContent, t);
+  const localizedServices = translateData(services, t);
 
   return (
     <section id="services" className="section services">
@@ -16,7 +19,7 @@ export function Services() {
           description={servicesCopy.description}
         />
         <div className="services__grid">
-          {services.map((service) => (
+          {localizedServices.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}
         </div>

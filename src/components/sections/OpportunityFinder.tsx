@@ -3,16 +3,19 @@ import { opportunities } from '../../data/opportunities';
 import { Button } from '../ui/Button';
 import { SectionHeading } from '../ui/SectionHeading';
 import './OpportunityFinder.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function OpportunityFinder() {
+  const { language, t } = useLanguage();
+  const localizedOpportunities = translateData(opportunities, t);
   const [selectedId, setSelectedId] = useState(opportunities[0].id);
-  const selected = opportunities.find((item) => item.id === selectedId) ?? opportunities[0];
+  const selected = localizedOpportunities.find((item) => item.id === selectedId) ?? localizedOpportunities[0];
 
   const requestConversation = () => {
     window.dispatchEvent(new CustomEvent('btt:opportunity-selected', {
       detail: {
         service: selected.service,
-        brief: `Our main priority is: ${selected.label}.`,
+        brief: language === 'nl' ? `Onze belangrijkste prioriteit is: ${selected.label}.` : `Our main priority is: ${selected.label}.`,
       },
     }));
 
@@ -25,14 +28,14 @@ export function OpportunityFinder() {
     <section id="opportunity-finder" className="section opportunity-finder">
       <div className="container">
         <SectionHeading
-          eyebrow="Opportunity Finder // Start with the Problem"
-          title="What Is Holding Your Business Back?"
-          description="Choose the challenge that feels most familiar. We will translate it into a practical technology direction—without requiring you to diagnose the solution first."
+          eyebrow={t('Opportunity Finder // Start with the Problem')}
+          title={t('What Is Holding Your Business Back?')}
+          description={t('Choose the challenge that feels most familiar. We will translate it into a practical technology direction—without requiring you to diagnose the solution first.')}
         />
 
         <div className="opportunity-finder__workspace">
-          <div className="opportunity-finder__choices" role="group" aria-label="Choose your main business challenge">
-            {opportunities.map((item, index) => {
+          <div className="opportunity-finder__choices" role="group" aria-label={t('Choose your main business challenge')}>
+            {localizedOpportunities.map((item, index) => {
               const selectedItem = item.id === selectedId;
               return (
                 <button
@@ -53,22 +56,22 @@ export function OpportunityFinder() {
           <article className="opportunity-finder__result" aria-live="polite" aria-atomic="true">
             <div className="opportunity-finder__scanline" aria-hidden="true" />
             <p className="opportunity-finder__signal"><span /> {selected.signal}</p>
-            <p className="opportunity-finder__result-label">Recommended direction</p>
+            <p className="opportunity-finder__result-label">{t('Recommended direction')}</p>
             <h3>{selected.service}</h3>
 
             <div className="opportunity-finder__result-block">
-              <span>Likely business outcome</span>
+              <span>{t('Likely business outcome')}</span>
               <p>{selected.outcome}</p>
             </div>
             <div className="opportunity-finder__result-block">
-              <span>Practical first step</span>
+              <span>{t('Practical first step')}</span>
               <p>{selected.firstStep}</p>
             </div>
 
             <Button type="button" variant="primary" size="lg" onClick={requestConversation}>
-              Discuss This Opportunity
+              {t('Discuss This Opportunity')}
             </Button>
-            <p className="opportunity-finder__note">Your selection will be added to the consultation form.</p>
+            <p className="opportunity-finder__note">{t('Your selection will be added to the consultation form.')}</p>
           </article>
         </div>
       </div>

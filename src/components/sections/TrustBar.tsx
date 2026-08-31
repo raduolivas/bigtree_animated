@@ -1,8 +1,10 @@
 import { siteContent } from '../../data/siteContent';
 import './TrustBar.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function TrustBar() {
-  const { trustBar } = siteContent;
+  const { t } = useLanguage();
+  const { trustBar } = translateData(siteContent, t);
 
   return (
     <section id="trust-bar" className="section section--compact trust-bar">
@@ -15,7 +17,7 @@ export function TrustBar() {
             </span>
           ))}
         </div>
-        <p className="trust-bar__disclaimer">Professional experience reference only; organization names do not imply endorsement or partnership.</p>
+        <p className="trust-bar__disclaimer">{t('Professional experience reference only; organization names do not imply endorsement or partnership.')}</p>
       </div>
     </section>
   );

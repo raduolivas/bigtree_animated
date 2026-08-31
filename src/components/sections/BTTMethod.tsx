@@ -2,9 +2,12 @@ import { siteContent } from '../../data/siteContent';
 import { methodSteps } from '../../data/method';
 import { SectionHeading } from '../ui/SectionHeading';
 import './BTTMethod.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function BTTMethod() {
-  const { method } = siteContent;
+  const { t } = useLanguage();
+  const { method } = translateData(siteContent, t);
+  const localizedSteps = translateData(methodSteps, t);
 
   return (
     <section id="btt-method" className="section btt-method">
@@ -17,7 +20,7 @@ export function BTTMethod() {
         />
 
         <div className="method__timeline">
-          {methodSteps.map((step) => (
+          {localizedSteps.map((step) => (
             <div key={step.id} className="method__step">
               <span className="method__step-number">{step.number}</span>
               <h3 className="method__step-title">{step.title}</h3>

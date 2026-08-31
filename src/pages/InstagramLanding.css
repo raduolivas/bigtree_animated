@@ -78,6 +78,16 @@
   text-transform: uppercase;
 }
 
+.instagram-lead__language {
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
 .instagram-lead__hero {
   display: grid;
   grid-template-columns: minmax(360px, 0.9fr) minmax(520px, 1.1fr);

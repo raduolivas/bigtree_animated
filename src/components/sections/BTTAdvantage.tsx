@@ -1,9 +1,11 @@
 import { siteContent } from '../../data/siteContent';
 import { SectionHeading } from '../ui/SectionHeading';
 import './BTTAdvantage.css';
+import { translateData, useLanguage } from '../../i18n/LanguageContext';
 
 export function BTTAdvantage() {
-  const { advantage } = siteContent;
+  const { t } = useLanguage();
+  const { advantage } = translateData(siteContent, t);
 
   return (
     <section id="btt-advantage" className="section btt-advantage">
