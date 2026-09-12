@@ -30,6 +30,8 @@ export function Navbar() {
     if (target) {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+    } else {
+      window.location.href = `/${href}`;
     }
     setMenuOpen(false);
   };

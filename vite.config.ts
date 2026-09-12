@@ -16,7 +16,21 @@ const sitesStaticWorker = (): Plugin => ({
 
     const url = new URL(request.url)
     url.pathname = '/'
-    return env.ASSETS.fetch(new Request(url, request))
+    const fallback = await env.ASSETS.fetch(new Request(url, request))
+    if (new URL(request.url).pathname !== '/nl/it-consultant-mkb') return fallback
+
+    const html = await fallback.text()
+    const title = 'IT-consultant voor MKB | AI-automatisering | BigTreeTech'
+    const description = 'Senior IT-consultant voor het MKB. Praktisch advies, AI-automatisering en professionele websites voor groeiende bedrijven in Nederland.'
+    const localized = html
+      .replace('<html lang="en">', '<html lang="nl">')
+      .replace(/<title>[^<]*<\\/title>/, '<title>' + title + '</title>')
+      .replace(/<meta name="description" content="[^"]*" \\/>/, '<meta name="description" content="' + description + '" />')
+      .replace(/<link rel="canonical" href="[^"]*" \\/>/, '<link rel="canonical" href="https://bigtreetech.it/nl/it-consultant-mkb" />')
+      .replace(/<meta property="og:title" content="[^"]*" \\/>/, '<meta property="og:title" content="' + title + '" />')
+      .replace(/<meta property="og:description" content="[^"]*" \\/>/, '<meta property="og:description" content="' + description + '" />')
+      .replace(/<meta property="og:url" content="[^"]*" \\/>/, '<meta property="og:url" content="https://bigtreetech.it/nl/it-consultant-mkb" />')
+    return new Response(localized, { status: 200, headers: { 'content-type': 'text/html; charset=UTF-8' } })
   },
 }\n`,
     })

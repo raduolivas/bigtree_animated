@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
 import { InstagramLanding } from './pages/InstagramLanding';
+import { DutchConsultancy } from './pages/DutchConsultancy';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -73,6 +74,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout><Home /></Layout>} />
       <Route path="/instagram" element={<InstagramLanding />} />
+      <Route path="/nl/it-consultant-mkb" element={<DutchConsultancy />} />
     </Routes>
   );
 }
