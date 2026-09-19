@@ -1,5 +1,10 @@
 export const faqs = [
   {
+    question: 'Can BTT replace the need to manage several freelancers?',
+    answer:
+      'That is exactly where our team-extension model helps. You work with one accountable technology partner who coordinates the right specialists, priorities, quality, and delivery instead of asking you to manage every contributor separately.',
+  },
+  {
     question: 'Is BTT only for large technology projects?',
     answer:
       'No. We work with small and medium businesses and start with the business problem. Sometimes the right answer is a focused automation or improvement—not a large rebuild.',

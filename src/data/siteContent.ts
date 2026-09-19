@@ -7,6 +7,7 @@ export const siteContent = {
   nav: {
     links: [
       { label: 'Home', href: '#home' },
+      { label: 'Team Extension', href: '#team-extension' },
       { label: 'Services', href: '#services' },
       { label: 'BTT Advantage', href: '#btt-advantage' },
       { label: 'BTT Method', href: '#btt-method' },
@@ -16,18 +17,41 @@ export const siteContent = {
   },
 
   hero: {
-    badge: 'Senior Technology Partner // Netherlands',
-    headline: 'Technology That Moves Your Business Forward.',
+    badge: 'Your Flexible Technology Team // Netherlands',
+    headline: 'One Technology Team. Fewer Moving Parts.',
     subheadline:
-      'We help ambitious small and medium businesses win more customers, automate costly work, and modernize the systems holding them back. Senior expertise, practical advice, and no unnecessary complexity.',
-    cta: 'Book a Growth Call',
-    secondaryCta: 'Explore Solutions',
+      'Stop coordinating separate freelancers for every digital project. BigTreeTech brings strategy, design, engineering, AI automation, cloud, and security together under one accountable senior partner.',
+    cta: 'Discuss Your Delivery Gap',
+    secondaryCta: 'See the Team Model',
     scrollIndicator: 'See How We Work',
   },
 
   trustBar: {
     label: 'Our specialists bring professional experience from organizations including:',
     companies: ['Google', 'Rabobank', 'Ericsson', 'ING', 'ASML'],
+  },
+
+  teamExtension: {
+    eyebrow: 'A Better Delivery Model // Team Extension',
+    title: 'The Skills You Need. One Accountable Partner.',
+    description:
+      'Use BigTreeTech as a flexible extension of your business. We shape the right delivery team around the outcome, coordinate the work, and stay responsible from first decision to final handover.',
+    fragmented: {
+      label: 'The fragmented model',
+      title: 'More suppliers. More management.',
+      points: ['Separate freelancers for each specialty', 'Quality and deadlines depend on every handoff', 'You become the project manager and technical translator'],
+    },
+    managed: {
+      label: 'The BigTreeTech model',
+      title: 'One brief. One coordinated team.',
+      points: ['Senior guidance and the right specialists for the work', 'Clear priorities, communication, quality control, and ownership', 'Flexible support without building a full internal department'],
+    },
+    steps: [
+      { number: '01', title: 'Clarify', text: 'We identify the business outcome, bottleneck, and skills genuinely required.' },
+      { number: '02', title: 'Assemble', text: 'We bring together the right mix of strategy, design, engineering, automation, cloud, and security.' },
+      { number: '03', title: 'Deliver', text: 'One accountable lead coordinates progress, quality, decisions, and handover.' },
+    ],
+    cta: 'Explore a Team Extension',
   },
 
   services: {
