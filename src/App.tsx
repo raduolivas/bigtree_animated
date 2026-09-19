@@ -4,6 +4,7 @@ import { Layout } from './components/layout/Layout';
 import { Home } from './pages/Home';
 import { InstagramLanding } from './pages/InstagramLanding';
 import { DutchConsultancy } from './pages/DutchConsultancy';
+import { AgencyPartner } from './pages/AgencyPartner';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,7 +27,7 @@ function App() {
     
     sections.forEach((section) => {
       const heading = section.querySelector('.section-heading');
-      const content = section.querySelector('.team-extension__comparison, .opportunity-finder__workspace, .services__grid, .advantage__grid, .technology__grid, .method__timeline, .faq__layout, .contact__wrapper, .vision__content');
+      const content = section.querySelector('.team-extension__comparison, .engagement-models__grid, .opportunity-finder__workspace, .services__grid, .advantage__grid, .technology__grid, .method__timeline, .faq__layout, .contact__wrapper, .vision__content');
       
       if (heading) {
         gsap.fromTo(heading, 
@@ -75,6 +76,7 @@ function App() {
       <Route path="/" element={<Layout><Home /></Layout>} />
       <Route path="/instagram" element={<InstagramLanding />} />
       <Route path="/nl/it-consultant-mkb" element={<DutchConsultancy />} />
+      <Route path="/agency-technology-partner" element={<AgencyPartner />} />
     </Routes>
   );
 }

@@ -21,6 +21,12 @@ const services = [
   },
 ];
 
+const models = [
+  { number: '01', label: 'Gerichte sprint', title: 'Eén bottleneck oplossen', text: 'Een afgebakend traject voor bijvoorbeeld conversie, een automatiseringspilot, technische audit of websiteverbetering.' },
+  { number: '02', label: 'Begeleid project', title: 'Van briefing tot lancering', text: 'Eén gecoördineerd team realiseert uw website, applicatie, integratie of modernisering met duidelijke mijlpalen.' },
+  { number: '03', label: 'Technologie-uitbreiding', title: 'Capaciteit zonder extra personeel', text: 'Doorlopende senior ondersteuning voor een roadmap die meerdere technische disciplines en veranderende prioriteiten omvat.' },
+];
+
 export function DutchConsultancy() {
   const { setLanguage } = useLanguage();
 
@@ -75,6 +81,23 @@ export function DutchConsultancy() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="nl-consultancy__section container" aria-labelledby="partner-title">
+        <div className="nl-consultancy__section-heading">
+          <p>Eén partner in plaats van losse leveranciers</p>
+          <h2 id="partner-title">Stop met het managen van ieder technisch specialisme</h2>
+        </div>
+        <div className="nl-consultancy__partner">
+          <p>Wanneer een project webdesign, software, automatisering, cloud en security raakt, wordt de ondernemer vaak onbedoeld projectmanager. BigTreeTech vormt het juiste team rond het resultaat en houdt één senior lead verantwoordelijk voor scope, communicatie, kwaliteit en overdracht.</p>
+          <ul><li>De juiste expertise wanneer die nodig is</li><li>Eén aanspreekpunt en één gecoördineerde werkwijze</li><li>Geen volledige interne IT-afdeling nodig</li><li>Documentatie en eigenaarschap blijven bij uw bedrijf</li></ul>
+        </div>
+      </section>
+
+      <section className="nl-consultancy__section container" aria-labelledby="modellen-title">
+        <div className="nl-consultancy__section-heading"><p>Samenwerkingsvormen</p><h2 id="modellen-title">Begin gericht. Schaal wanneer het zinvol is.</h2></div>
+        <div className="nl-consultancy__grid">{models.map((model) => <article key={model.number}><span>{model.number}</span><p className="nl-consultancy__model-label">{model.label}</p><h3>{model.title}</h3><p>{model.text}</p></article>)}</div>
+        <p className="nl-consultancy__price-note">Na een gratis scopegesprek ontvangt u het aanbevolen model, de aannames, planning en investering schriftelijk. Geen vage schattingen of onverwachte facturen.</p>
       </section>
 
       <section className="nl-consultancy__section nl-consultancy__process container">

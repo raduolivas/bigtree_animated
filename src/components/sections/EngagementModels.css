@@ -1,0 +1,16 @@
+.engagement-models { background: rgba(5, 13, 8, 0.5); }
+.engagement-models__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+.engagement-models__card { display: flex; flex-direction: column; min-height: 34rem; padding: var(--space-8); border: 1px solid var(--color-border); border-radius: var(--radius-xl); background: linear-gradient(160deg, rgba(22, 39, 28, 0.78), rgba(7, 16, 11, 0.9)); }
+.engagement-models__card--featured { border-color: rgba(80, 255, 160, 0.36); background: radial-gradient(circle at 100% 0%, rgba(80, 255, 160, 0.12), transparent 36%), linear-gradient(160deg, rgba(20, 48, 31, 0.9), rgba(7, 16, 11, 0.94)); }
+.engagement-models__meta { display: flex; justify-content: space-between; gap: var(--space-4); color: var(--color-text-subtle); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+.engagement-models__meta span:first-child { color: var(--color-cyber); }
+.engagement-models__label { margin-top: var(--space-12); color: var(--color-gold); font-family: var(--font-mono); font-size: var(--text-sm); letter-spacing: var(--tracking-wide); text-transform: uppercase; }
+.engagement-models__card h3 { margin: var(--space-4) 0; font-family: var(--font-display); font-size: var(--text-3xl); font-weight: var(--weight-regular); line-height: 1.08; text-transform: uppercase; }
+.engagement-models__text { color: var(--color-text-muted); line-height: var(--leading-relaxed); }
+.engagement-models__card ul { display: grid; gap: var(--space-3); margin-top: auto; padding-top: var(--space-8); border-top: 1px solid var(--color-border); }
+.engagement-models__card li { position: relative; padding-left: var(--space-6); color: var(--color-text-muted); }
+.engagement-models__card li::before { content: '+'; position: absolute; left: 0; color: var(--color-cyber); font-family: var(--font-mono); }
+.engagement-models__pricing { display: grid; grid-template-columns: 1fr auto; gap: var(--space-8); align-items: center; margin-top: var(--space-8); padding: var(--space-7); border: 1px solid var(--color-border-hover); border-radius: var(--radius-xl); background: rgba(10, 28, 18, 0.64); }
+.engagement-models__pricing p { max-width: 790px; color: var(--color-text-muted); line-height: var(--leading-relaxed); }
+@media (max-width: 1000px) { .engagement-models__grid { grid-template-columns: 1fr; } .engagement-models__card { min-height: 0; } }
+@media (max-width: 700px) { .engagement-models__pricing { grid-template-columns: 1fr; } }

@@ -8,6 +8,7 @@ export const siteContent = {
     links: [
       { label: 'Home', href: '#home' },
       { label: 'Team Extension', href: '#team-extension' },
+      { label: 'Ways to Work', href: '#engagement-models' },
       { label: 'Services', href: '#services' },
       { label: 'BTT Advantage', href: '#btt-advantage' },
       { label: 'BTT Method', href: '#btt-method' },
@@ -52,6 +53,19 @@ export const siteContent = {
       { number: '03', title: 'Deliver', text: 'One accountable lead coordinates progress, quality, decisions, and handover.' },
     ],
     cta: 'Explore a Team Extension',
+  },
+
+  engagementModels: {
+    eyebrow: 'Ways to Work // Built Around the Need',
+    title: 'Start Focused. Scale When It Makes Sense.',
+    description: 'Choose the level of support that fits the problem today. Every engagement has one accountable lead, a clear scope, and a written price before you commit.',
+    models: [
+      { label: 'Focused Sprint', timeframe: 'Typically 2–6 weeks', title: 'Solve one important bottleneck.', text: 'A defined piece of work such as a conversion review, automation pilot, technical audit, or website improvement.', points: ['Fixed outcome and scope', 'Senior specialist delivery', 'Clear handover and next-step advice'] },
+      { label: 'Managed Project', timeframe: 'Milestone-based delivery', title: 'Take one project from brief to launch.', text: 'A coordinated team delivers a website, application, integration, or modernization project without making you manage every discipline.', points: ['One delivery lead', 'Right specialists at each stage', 'Visible milestones and quality control'] },
+      { label: 'Technology Extension', timeframe: 'Ongoing monthly partnership', title: 'Add reliable capacity without adding headcount.', text: 'Flexible senior support for a continuing roadmap, changing priorities, and work that spans several technical disciplines.', points: ['Prioritized monthly capacity', 'Flexible mix of expertise', 'Continuity without fragmented suppliers'] },
+    ],
+    pricing: 'No vague estimates or surprise invoices. After a free scoping conversation, you receive the recommended model, assumptions, timeline, and investment in writing.',
+    cta: 'Find the Right Starting Model',
   },
 
   services: {

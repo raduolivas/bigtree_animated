@@ -1,6 +1,7 @@
 import { siteContent } from '../../data/siteContent';
 import { translateData, useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../ui/Button';
+import { Link } from 'react-router-dom';
 import { SectionHeading } from '../ui/SectionHeading';
 import './TeamExtension.css';
 
@@ -51,6 +52,7 @@ export function TeamExtension() {
 
         <div className="team-extension__action">
           <Button variant="primary" size="lg" onClick={scrollToContact}>{teamExtension.cta}</Button>
+          <Link className="team-extension__agency-link" to="/agency-technology-partner">{t('For agencies: explore white-label delivery')} <span aria-hidden="true">→</span></Link>
         </div>
       </div>
     </section>

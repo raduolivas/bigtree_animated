@@ -28,6 +28,7 @@ export function Footer() {
                 </li>
               ))}
               <li><a href="/nl/it-consultant-mkb" className="footer__link">IT-consultant voor MKB</a></li>
+              <li><a href="/agency-technology-partner" className="footer__link">Agency Technology Partner</a></li>
             </ul>
           </div>
 
