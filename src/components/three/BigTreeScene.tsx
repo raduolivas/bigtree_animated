@@ -3,9 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { ContactShadows, useProgress } from '@react-three/drei';
 import { detectGPUTier, isMobile } from '../../utils/deviceDetect';
 import { TreeModel } from './TreeModel';
-import { TreeFruit } from './TreeFruit';
 import { TreeParticles } from './TreeParticles';
-import { TreeRoots } from './TreeRoots';
 import { TreeLighting } from './TreeLighting';
 import { TreeCamera } from './TreeCamera';
 import './BigTreeScene.css';
@@ -17,7 +15,7 @@ const phaseLabels = {
   roots: ['01', 'DISCOVERY'],
   trunk: ['02', 'FOUNDATION'],
   branches: ['03', 'STRATEGY'],
-  fruits: ['04', 'DELIVERY'],
+  fruits: ['04', 'CANOPY'],
   mature: ['05', 'GROWTH'],
   network: ['06', 'SCALE'],
   ecosystem: ['07', 'PARTNERSHIP'],
@@ -118,9 +116,7 @@ export function BigTreeScene() {
               <SceneLoadingStatus onReady={() => setSceneReady(true)} onProgress={setLoadProgress} />
               <TreeLighting />
               <TreeCamera />
-              <TreeRoots />
               <TreeModel />
-              <TreeFruit />
               <TreeParticles gpuTier={gpuTier} mobile={mobile} />
               {gpuTier === 'high' && (
                 <ContactShadows

@@ -11,7 +11,7 @@ export function TreeModel() {
   
   const groupRef = useRef<THREE.Group>(null);
 
-  const { scene } = useGLTF('/model/tree/tree-v2.glb', true);
+  const { scene } = useGLTF('/model/tree/tree-v2.glb?v=3', true);
   const gltfScene = useMemo(() => scene.clone(), [scene]);
   useMemo(() => {
     if (gltfScene) {

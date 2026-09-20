@@ -2,6 +2,10 @@
 
 The production tree is stored at `public/model/tree/tree-v2.glb`.
 
+The root system is modeled directly into the GLB so it shares the tree's bark
+material and moves naturally with the trunk. The former procedural tube roots
+and colored service spheres are intentionally not rendered.
+
 It is optimized for web delivery with Meshopt geometry compression and embedded
 2048px WebP textures. The original source remains recoverable from Git history.
 
