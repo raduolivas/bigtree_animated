@@ -1,9 +1,10 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { ptBR } from './ptBR';
 
-export type Language = 'en' | 'nl';
+export type Language = 'en' | 'nl' | 'pt-BR';
 
 const nl: Record<string, string> = {
-  'Home': 'Home', 'Team Extension': 'Teamuitbreiding', 'Ways to Work': 'Samenwerkingsvormen', 'Services': 'Diensten', 'BTT Advantage': 'BTT Voordeel', 'BTT Method': 'BTT Methode', 'FAQ': 'Vragen', 'Contact': 'Contact',
+  'Home': 'Home', 'Team Extension': 'Teamuitbreiding', 'Ways to Work': 'Samenwerkingsvormen', 'Services': 'Diensten', 'BTT Advantage': 'BTT Voordeel', 'BTT Method': 'BTT Methode', 'FAQ': 'Vragen', 'Contact': 'Contact', 'Choose language': 'Taal kiezen',
   'Technology Built for Growth': 'Technologie gebouwd voor groei',
   'Senior Technology Partner // Netherlands': 'Senior technologiepartner // Nederland',
   'Your Flexible Technology Team // Netherlands': 'Uw flexibele technologieteam // Nederland',
@@ -13,7 +14,7 @@ const nl: Record<string, string> = {
   'Technology That Moves Your Business Forward.': 'Technologie die uw bedrijf vooruithelpt.',
   'We help ambitious small and medium businesses win more customers, automate costly work, and modernize the systems holding them back. Senior expertise, practical advice, and no unnecessary complexity.': 'Wij helpen ambitieuze mkb-bedrijven meer klanten te winnen, kostbaar werk te automatiseren en verouderde systemen te moderniseren. Senior expertise, praktisch advies en geen onnodige complexiteit.',
   'Book a Growth Call': 'Plan een groeigesprek', 'Explore Solutions': 'Bekijk oplossingen', 'See How We Work': 'Ontdek onze werkwijze',
-  '30 minutes': '30 minuten', 'Senior specialist': 'Senior specialist', 'No obligation': 'Vrijblijvend',
+  '30 minutes': '30 minuten', 'Senior specialist': 'Senior specialist', 'No obligation': 'Vrijblijvend', 'Growth call details': 'Details van het groeigesprek',
   'Our specialists bring professional experience from organizations including:': 'Onze specialisten brengen professionele ervaring mee van organisaties zoals:',
   'A Better Delivery Model // Team Extension': 'Een beter leveringsmodel // Teamuitbreiding', 'The Skills You Need. One Accountable Partner.': 'De expertise die u nodig hebt. Eén verantwoordelijke partner.',
   'Use BigTreeTech as a flexible extension of your business. We shape the right delivery team around the outcome, coordinate the work, and stay responsible from first decision to final handover.': 'Zet BigTreeTech in als flexibele uitbreiding van uw bedrijf. Wij vormen het juiste team rond het resultaat, coördineren het werk en blijven verantwoordelijk van de eerste beslissing tot de uiteindelijke overdracht.',
@@ -103,8 +104,11 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem('btt-language');
-    if (saved === 'en' || saved === 'nl') return saved;
-    return navigator.language.toLowerCase().startsWith('nl') ? 'nl' : 'en';
+    if (saved === 'en' || saved === 'nl' || saved === 'pt-BR') return saved;
+    const browserLanguage = navigator.language.toLowerCase();
+    if (browserLanguage.startsWith('nl')) return 'nl';
+    if (browserLanguage.startsWith('pt')) return 'pt-BR';
+    return 'en';
   });
 
   const setLanguage = (next: Language) => {
@@ -114,10 +118,22 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = language;
-    document.title = language === 'nl' ? 'BTT Consulting | Technologie voor groei' : 'BTT Consulting | Technology Built for Growth';
+    document.title = language === 'nl'
+      ? 'BTT Consulting | Technologie voor groei'
+      : language === 'pt-BR'
+        ? 'BTT Consulting | Tecnologia criada para crescer'
+        : 'BTT Consulting | Technology Built for Growth';
   }, [language]);
 
-  const value = useMemo(() => ({ language, setLanguage, t: (text: string) => language === 'nl' ? (nl[text] ?? text) : text }), [language]);
+  const value = useMemo(() => ({
+    language,
+    setLanguage,
+    t: (text: string) => {
+      if (language === 'nl') return nl[text] ?? text;
+      if (language === 'pt-BR') return ptBR[text] ?? text;
+      return text;
+    },
+  }), [language]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

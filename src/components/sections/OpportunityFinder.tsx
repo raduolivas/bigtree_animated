@@ -15,7 +15,11 @@ export function OpportunityFinder() {
     window.dispatchEvent(new CustomEvent('btt:opportunity-selected', {
       detail: {
         service: selected.service,
-        brief: language === 'nl' ? `Onze belangrijkste prioriteit is: ${selected.label}.` : `Our main priority is: ${selected.label}.`,
+        brief: language === 'nl'
+          ? `Onze belangrijkste prioriteit is: ${selected.label}.`
+          : language === 'pt-BR'
+            ? `Nossa principal prioridade é: ${selected.label}.`
+            : `Our main priority is: ${selected.label}.`,
       },
     }));
 

@@ -94,7 +94,7 @@ export function Contact() {
             description={contact.description}
           />
 
-          <div className="contact__promise" aria-label="Consultation promise">
+          <div className="contact__promise" aria-label={t('Consultation promise')}>
             <span>{t('Free 30-minute conversation')}</span>
             <span>{t('Reply within one business day')}</span>
             <span>{t('No sales pressure')}</span>
@@ -122,7 +122,7 @@ export function Contact() {
                 </div>
               </aside>
 
-              <form className="contact__form" onSubmit={handleSubmit} aria-label="Request a growth call">
+              <form className="contact__form" onSubmit={handleSubmit} aria-label={t('Request a growth call')}>
               <div className="contact__field">
                 <label htmlFor="name" className="contact__label">{t('Full Name')}</label>
                 <input
@@ -132,7 +132,7 @@ export function Contact() {
                   autoComplete="name"
                   required
                   className="contact__input"
-                  placeholder="John Doe"
+                  placeholder={language === 'pt-BR' ? 'João Silva' : 'John Doe'}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 />
@@ -147,7 +147,7 @@ export function Contact() {
                   autoComplete="email"
                   required
                   className="contact__input"
-                  placeholder="you@company.com"
+                  placeholder={language === 'pt-BR' ? 'voce@empresa.com' : 'you@company.com'}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
@@ -203,7 +203,13 @@ export function Contact() {
               <p className="contact__privacy-note">{t('Your details are used only to respond to this enquiry. If direct submission is not configured, your email application will open with a prepared draft.')}</p>
 
               {submissionState === 'error' && (
-                <p className="contact__error" role="alert">{language === 'nl' ? `De aanvraag kon niet worden verzonden. E-mail ons rechtstreeks via ${localizedSite.footer.email}.` : `We could not send the request. Please email ${localizedSite.footer.email} directly.`}</p>
+                <p className="contact__error" role="alert">
+                  {language === 'nl'
+                    ? `De aanvraag kon niet worden verzonden. E-mail ons rechtstreeks via ${localizedSite.footer.email}.`
+                    : language === 'pt-BR'
+                      ? `Não foi possível enviar a solicitação. Envie um e-mail diretamente para ${localizedSite.footer.email}.`
+                      : `We could not send the request. Please email ${localizedSite.footer.email} directly.`}
+                </p>
               )}
 
               <Button type="submit" variant="primary" size="lg" disabled={submissionState === 'submitting'}>
@@ -220,7 +226,11 @@ export function Contact() {
               <p className="contact__success-description">
                 {submissionState === 'sent'
                   ? contact.success.description
-                  : language === 'nl' ? `Uw e-mailprogramma bevat nu een voorbereid bericht aan ${localizedSite.footer.email}. Controleer het en druk op verzenden om uw aanvraag af te ronden.` : `Your email application should now contain a prepared message to ${localizedSite.footer.email}. Review it and press send to complete your request.`}
+                  : language === 'nl'
+                    ? `Uw e-mailprogramma bevat nu een voorbereid bericht aan ${localizedSite.footer.email}. Controleer het en druk op verzenden om uw aanvraag af te ronden.`
+                    : language === 'pt-BR'
+                      ? `Seu aplicativo de e-mail agora contém uma mensagem preparada para ${localizedSite.footer.email}. Revise-a e pressione enviar para concluir sua solicitação.`
+                      : `Your email application should now contain a prepared message to ${localizedSite.footer.email}. Review it and press send to complete your request.`}
               </p>
               <Button type="button" variant="secondary" size="lg" onClick={handleReset}>
                 {contact.success.cta}

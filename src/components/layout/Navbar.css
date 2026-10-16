@@ -111,7 +111,7 @@
   transform: translateY(-6.5px) rotate(-45deg);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
   .navbar__toggle {
     display: flex;
   }

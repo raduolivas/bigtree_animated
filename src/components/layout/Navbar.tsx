@@ -67,10 +67,12 @@ export function Navbar() {
               </a>
             </li>
           ))}
-          <li className="navbar__language" aria-label={language === 'nl' ? 'Taal kiezen' : 'Choose language'}>
+          <li className="navbar__language" aria-label={t('Choose language')}>
             <button type="button" className={language === 'en' ? 'is-active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button>
             <span>/</span>
             <button type="button" className={language === 'nl' ? 'is-active' : ''} onClick={() => setLanguage('nl')} aria-pressed={language === 'nl'}>NL</button>
+            <span>/</span>
+            <button type="button" className={language === 'pt-BR' ? 'is-active' : ''} onClick={() => setLanguage('pt-BR')} aria-pressed={language === 'pt-BR'}>PT-BR</button>
           </li>
         </ul>
       </div>

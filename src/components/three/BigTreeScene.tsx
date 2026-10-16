@@ -9,6 +9,7 @@ import { TreeCamera } from './TreeCamera';
 import './BigTreeScene.css';
 import * as THREE from 'three';
 import { useTreeState } from '../../hooks/useTreeState';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 const phaseLabels = {
   seed: ['00', 'ORIGIN'],
@@ -58,6 +59,7 @@ function SceneLoadingStatus({ onReady, onProgress }: { onReady: () => void; onPr
 }
 
 export function BigTreeScene() {
+  const { t } = useLanguage();
   const gpuTier = useMemo(() => detectGPUTier(), []);
   const mobile = useMemo(() => isMobile(), []);
   const [sceneReady, setSceneReady] = useState(false);
@@ -84,7 +86,7 @@ export function BigTreeScene() {
 
       {!sceneReady && !sceneFailed && (
         <div className="tree-scene__loading">
-          <span>Growing digital ecosystem</span>
+          <span>{t('Growing digital ecosystem')}</span>
           <span>{Math.round(loadProgress).toString().padStart(2, '0')}%</span>
           <i style={{ '--tree-load': `${loadProgress}%` } as CSSProperties} />
         </div>
@@ -92,7 +94,7 @@ export function BigTreeScene() {
 
       <div className="tree-scene__phase">
         <span className="tree-scene__phase-number">{phaseNumber}</span>
-        <span className="tree-scene__phase-name">// {phaseName}</span>
+        <span className="tree-scene__phase-name">// {t(phaseName)}</span>
       </div>
 
       {!sceneFailed && (

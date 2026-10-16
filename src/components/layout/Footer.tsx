@@ -27,8 +27,8 @@ export function Footer() {
                   <a href="#services" className="footer__link">{service}</a>
                 </li>
               ))}
-              <li><a href="/nl/it-consultant-mkb" className="footer__link">IT-consultant voor MKB</a></li>
-              <li><a href="/agency-technology-partner" className="footer__link">Agency Technology Partner</a></li>
+              <li><a href="/nl/it-consultant-mkb" className="footer__link">{t('IT-consultant voor MKB')}</a></li>
+              <li><a href="/agency-technology-partner" className="footer__link">{t('Agency Technology Partner')}</a></li>
             </ul>
           </div>
 

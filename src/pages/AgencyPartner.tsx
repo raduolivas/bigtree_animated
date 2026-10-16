@@ -36,15 +36,40 @@ const copy = {
     fitTitle: 'Een sterke match wanneer…', fit: ['U beheert de klantrelatie en kunt één duidelijke beslisser aanwijzen.', 'Het project vraagt senior technische uitvoering, geen goedkope anonieme productie.', 'U hecht waarde aan documentatie, security, eerlijke communicatie en duurzame delivery.'],
     closing: 'Zet meer gekwalificeerde kansen om in werk dat uw bureau met vertrouwen kan leveren.', closingCta: 'Bespreek uw volgende project',
   },
+  'pt-BR': {
+    eyebrow: 'Parceiro tecnológico white-label // Para agências', title: 'Mantenha o cliente. Amplie a equipe.',
+    lead: 'A BigTreeTech ajuda agências a entregar o trabalho técnico por trás de projetos ambiciosos de clientes, sem recrutar, coordenar vários freelancers ou abrir mão do relacionamento com o cliente.',
+    cta: 'Conversar sobre uma parceria', secondary: 'Voltar à BigTreeTech',
+    painLabel: 'A lacuna de entrega', painTitle: 'Suas oportunidades não devem ser limitadas pela capacidade técnica.',
+    pains: ['Um projeto vendido exige competências que sua equipe atual não possui.', 'A disponibilidade dos freelancers muda no meio da entrega.', 'Sua equipe perde horas faturáveis coordenando detalhes técnicos e qualidade.'],
+    modelLabel: 'A parceria BTT', modelTitle: 'Uma camada técnica discreta por trás da sua agência.',
+    benefits: [['White-label por acordo', 'Podemos trabalhar discretamente por trás da sua marca, com limites claros para a comunicação com o cliente.'], ['Um líder responsável', 'Você tem um único contato sênior coordenando especialidades, qualidade, progresso e transferência.'], ['Combinação flexível de especialistas', 'Acione competências em web, aplicativos, automação, cloud ou segurança somente quando o trabalho exigir.'], ['Preparado para transferência', 'Documentação, acessos e propriedade são organizados para que nem você nem seu cliente fiquem dependentes da BTT.']],
+    processLabel: 'Um processo de entrega tranquilo', processTitle: 'Primeiro, alinhamento profundo. Depois, execução confiável.',
+    steps: [['01', 'Qualificar juntos', 'Analisamos a oportunidade, o escopo, as responsabilidades, os riscos e a compatibilidade comercial antes de você prometer a entrega.'], ['02', 'Alinhar a entrega', 'Combinamos comunicação, visibilidade da marca, marcos, responsabilidade pelas aprovações e a definição de concluído.'], ['03', 'Entregar como uma equipe', 'Trabalhamos em um único fluxo coordenado enquanto sua agência mantém o relacionamento estratégico com o cliente.']],
+    fitTitle: 'Uma ótima combinação quando…', fit: ['Você é responsável pelo relacionamento com o cliente e pode indicar um tomador de decisão claro.', 'O projeto exige execução técnica sênior, não produção anônima de baixo custo.', 'Você valoriza documentação, segurança, comunicação honesta e entrega sustentável.'],
+    closing: 'Transforme mais oportunidades qualificadas em trabalhos que sua agência pode entregar com confiança.', closingCta: 'Falar sobre seu próximo projeto',
+  },
 };
 
 export function AgencyPartner() {
-  const { language } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const c = copy[language];
   useEffect(() => { document.title = `${c.title} | BigTreeTech`; window.scrollTo(0, 0); }, [c.title]);
   return (
     <main className="agency-page">
-      <header className="agency-page__header container"><Link to="/" className="agency-page__brand">BTT Consulting</Link><Link to="/#contact" className="agency-page__header-cta">{c.cta}</Link></header>
+      <header className="agency-page__header container">
+        <Link to="/" className="agency-page__brand">BTT Consulting</Link>
+        <div className="agency-page__header-actions">
+          <div className="agency-page__language" aria-label={t('Choose language')}>
+            <button type="button" className={language === 'en' ? 'is-active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button>
+            <span>/</span>
+            <button type="button" className={language === 'nl' ? 'is-active' : ''} onClick={() => setLanguage('nl')} aria-pressed={language === 'nl'}>NL</button>
+            <span>/</span>
+            <button type="button" className={language === 'pt-BR' ? 'is-active' : ''} onClick={() => setLanguage('pt-BR')} aria-pressed={language === 'pt-BR'}>PT-BR</button>
+          </div>
+          <Link to="/#contact" className="agency-page__header-cta">{c.cta}</Link>
+        </div>
+      </header>
       <section className="agency-page__hero container"><p className="agency-page__eyebrow">{c.eyebrow}</p><h1>{c.title}</h1><p className="agency-page__lead">{c.lead}</p><div className="agency-page__actions"><Link to="/#contact" className="agency-page__cta">{c.cta}</Link><Link to="/" className="agency-page__secondary">{c.secondary}</Link></div></section>
       <section className="agency-page__split container"><article><p className="agency-page__eyebrow">{c.painLabel}</p><h2>{c.painTitle}</h2><ul>{c.pains.map((x) => <li key={x}>{x}</li>)}</ul></article><article className="agency-page__split-highlight"><p className="agency-page__eyebrow">{c.modelLabel}</p><h2>{c.modelTitle}</h2><div className="agency-page__benefits">{c.benefits.map(([title, text]) => <div key={title}><h3>{title}</h3><p>{text}</p></div>)}</div></article></section>
       <section className="agency-page__section container"><p className="agency-page__eyebrow">{c.processLabel}</p><h2>{c.processTitle}</h2><div className="agency-page__steps">{c.steps.map(([n, title, text]) => <article key={n}><span>{n}</span><h3>{title}</h3><p>{text}</p></article>)}</div></section>

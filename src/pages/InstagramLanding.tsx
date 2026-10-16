@@ -27,7 +27,11 @@ export function InstagramLanding() {
 
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = language === 'nl' ? 'Word lid van de BTT Europe Growth Circle | BigTreeTech' : 'Join the BTT Europe Growth Circle | BigTreeTech';
+    document.title = language === 'nl'
+      ? 'Word lid van de BTT Europe Growth Circle | BigTreeTech'
+      : language === 'pt-BR'
+        ? 'Participe do BTT Europe Growth Circle | BigTreeTech'
+        : 'Join the BTT Europe Growth Circle | BigTreeTech';
     window.scrollTo(0, 0);
     return () => {
       document.title = previousTitle;
@@ -70,10 +74,19 @@ export function InstagramLanding() {
       </div>
 
       <header className="instagram-lead__header">
-        <Link to="/" className="instagram-lead__brand" aria-label="BigTreeTech home">
+        <Link to="/" className="instagram-lead__brand" aria-label={`BigTreeTech ${t('Home')}`}>
           <span aria-hidden="true">◆</span> BigTreeTech
         </Link>
-        <p>{t('Europe Growth Circle // Early Access')} · <button type="button" className="instagram-lead__language" onClick={() => setLanguage(language === 'en' ? 'nl' : 'en')}>{language === 'en' ? 'NL' : 'EN'}</button></p>
+        <p>
+          <span className="instagram-lead__header-label">{t('Europe Growth Circle // Early Access')} ·</span>
+          <span className="instagram-lead__language" aria-label={t('Choose language')}>
+            <button type="button" className={language === 'en' ? 'is-active' : ''} onClick={() => setLanguage('en')} aria-pressed={language === 'en'}>EN</button>
+            <span>/</span>
+            <button type="button" className={language === 'nl' ? 'is-active' : ''} onClick={() => setLanguage('nl')} aria-pressed={language === 'nl'}>NL</button>
+            <span>/</span>
+            <button type="button" className={language === 'pt-BR' ? 'is-active' : ''} onClick={() => setLanguage('pt-BR')} aria-pressed={language === 'pt-BR'}>PT-BR</button>
+          </span>
+        </p>
       </header>
 
       <section className="instagram-lead__hero" aria-labelledby="instagram-lead-title">
@@ -84,7 +97,7 @@ export function InstagramLanding() {
             {t('Join an international community for ambitious founders, professionals, and business owners who want to turn ideas into practical opportunities across Europe—with technology, guidance, and human connection.')}
           </p>
 
-          <div className="instagram-lead__benefits" aria-label="Community benefits">
+          <div className="instagram-lead__benefits" aria-label={t('Community benefits')}>
             <article>
               <span>01</span>
               <div><strong>{t('Find your direction')}</strong><p>{t('Clarify your next business or technology move.')}</p></div>
@@ -114,7 +127,7 @@ export function InstagramLanding() {
               <div className="instagram-lead__fields instagram-lead__fields--two">
                 <label>
                   <span>{t('Full name')}</span>
-                  <input required autoComplete="name" value={formData.name} onChange={(event) => setFormData({ ...formData, name: event.target.value })} placeholder="Your name" />
+                  <input required autoComplete="name" value={formData.name} onChange={(event) => setFormData({ ...formData, name: event.target.value })} placeholder={t('Your name')} />
                 </label>
                 <label>
                   <span>{t('Email address')}</span>
@@ -122,11 +135,11 @@ export function InstagramLanding() {
                 </label>
                 <label>
                   <span>{t('Country')}</span>
-                  <input required autoComplete="country-name" value={formData.country} onChange={(event) => setFormData({ ...formData, country: event.target.value })} placeholder="Where do you live?" />
+                  <input required autoComplete="country-name" value={formData.country} onChange={(event) => setFormData({ ...formData, country: event.target.value })} placeholder={t('Where do you live?')} />
                 </label>
                 <label>
                   <span>{t('City')}</span>
-                  <input required autoComplete="address-level2" value={formData.city} onChange={(event) => setFormData({ ...formData, city: event.target.value })} placeholder="Your city" />
+                  <input required autoComplete="address-level2" value={formData.city} onChange={(event) => setFormData({ ...formData, city: event.target.value })} placeholder={t('Your city')} />
                 </label>
               </div>
 
@@ -139,7 +152,7 @@ export function InstagramLanding() {
 
               <label className="instagram-lead__field">
                 <span>{t('What would you like to achieve?')}</span>
-                <textarea required rows={3} maxLength={700} value={formData.goal} onChange={(event) => setFormData({ ...formData, goal: event.target.value })} placeholder="Tell us about your idea, business goal, or biggest challenge…" />
+                <textarea required rows={3} maxLength={700} value={formData.goal} onChange={(event) => setFormData({ ...formData, goal: event.target.value })} placeholder={t('Tell us about your idea, business goal, or biggest challenge…')} />
                 <small>{formData.goal.length}/700</small>
               </label>
 
@@ -159,20 +172,20 @@ export function InstagramLanding() {
                 <span>{t('Yes, send me occasional BTT community news and European opportunities by email.')}</span>
               </label>
 
-              {submissionState === 'error' && <p className="instagram-lead__error" role="alert">We could not prepare your request. Email us directly at {siteContent.footer.email}.</p>}
+              {submissionState === 'error' && <p className="instagram-lead__error" role="alert">{t('We could not prepare your request. Email us directly at')} {siteContent.footer.email}.</p>}
 
               <button className="instagram-lead__submit" type="submit" disabled={submissionState === 'submitting'}>
                 {submissionState === 'submitting' ? t('Sending…') : t('Request My Invitation')} <span aria-hidden="true">→</span>
               </button>
-              <p className="instagram-lead__privacy">BTT Consulting uses these details only for your request and the updates you explicitly choose. You can withdraw consent or request deletion at <a href={`mailto:${siteContent.footer.email}`}>{siteContent.footer.email}</a>.</p>
+              <p className="instagram-lead__privacy">{t('BTT Consulting uses these details only for your request and the updates you explicitly choose. You can withdraw consent or request deletion at')} <a href={`mailto:${siteContent.footer.email}`}>{siteContent.footer.email}</a>.</p>
             </form>
           ) : (
             <div className="instagram-lead__success" role="status">
               <span aria-hidden="true">✓</span>
-              <p>Journey request prepared</p>
-              <h2>{submissionState === 'sent' ? 'Welcome to the beginning.' : 'One final step: send your email.'}</h2>
-              <p>{submissionState === 'sent' ? 'We received your details and will reply personally.' : `Your email app now contains a prepared message to ${siteContent.footer.email}. Review it and press send so we can receive your request.`}</p>
-              <button type="button" onClick={() => { setSubmissionState('idle'); setFormData(initialForm); }}>Start another request</button>
+              <p>{t('Journey request prepared')}</p>
+              <h2>{submissionState === 'sent' ? t('Welcome to the beginning.') : t('One final step: send your email.')}</h2>
+              <p>{submissionState === 'sent' ? t('We received your details and will reply personally.') : `${t('Your email app now contains a prepared message. Review it and press send so we can receive your request.')} ${siteContent.footer.email}`}</p>
+              <button type="button" onClick={() => { setSubmissionState('idle'); setFormData(initialForm); }}>{t('Start another request')}</button>
             </div>
           )}
         </div>
