@@ -4,6 +4,11 @@ import { useScrollStore } from '../stores/scrollStore';
 
 let lenisInstance: Lenis | null = null;
 
+export function setPageScrollLocked(locked: boolean) {
+  if (locked) lenisInstance?.stop();
+  else lenisInstance?.start();
+}
+
 export function useScrollProgress() {
   const setScrollY = useScrollStore((s) => s.setScrollY);
   const setScrollProgress = useScrollStore((s) => s.setScrollProgress);

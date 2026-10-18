@@ -276,6 +276,8 @@ export const ptBR: Record<string, string> = {
   'Skip to main content': 'Ir para o conteúdo principal',
   'Main navigation': 'Navegação principal',
   'Toggle navigation menu': 'Abrir ou fechar o menu de navegação',
+  'Open navigation menu': 'Abrir menu de navegação',
+  'Close navigation menu': 'Fechar menu de navegação',
   'Growing digital ecosystem': 'Ecossistema digital em crescimento',
   'ORIGIN': 'ORIGEM',
   'DISCOVERY': 'DESCOBERTA',
