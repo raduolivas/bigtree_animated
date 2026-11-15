@@ -31,7 +31,7 @@ function App() {
       
       if (heading) {
         gsap.fromTo(heading, 
-          { y: 40, opacity: 0 },
+          { y: 24 },
           { 
             y: 0, 
             opacity: 1, 
@@ -49,10 +49,9 @@ function App() {
 
       if (content) {
         gsap.fromTo(content,
-          { y: 60, opacity: 0 },
+          { y: 32 },
           {
             y: 0,
-            opacity: 1,
             duration: 1.2,
             delay: 0.2,
             ease: 'power3.out',

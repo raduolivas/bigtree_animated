@@ -47,24 +47,22 @@
   box-shadow: 0 0 32px 8px rgba(48, 91, 61, 0.12);
 }
 
-.tree-scene__silhouette {
+/* Keep a continuous green veil above the scene, including transparent sections. */
+.tree-scene::after {
+  content: '';
   position: absolute;
-  width: clamp(220px, 31vw, 480px);
-  height: clamp(360px, 68vh, 700px);
-  right: clamp(-80px, 5vw, 110px);
-  bottom: -8vh;
-  opacity: 0.42;
-  background:
-    radial-gradient(ellipse at 48% 19%, #264f34 0 16%, transparent 17%),
-    radial-gradient(ellipse at 27% 31%, #20452d 0 17%, transparent 18%),
-    radial-gradient(ellipse at 70% 33%, #2b5739 0 19%, transparent 20%),
-    radial-gradient(ellipse at 48% 42%, #1c3d28 0 23%, transparent 24%),
-    linear-gradient(88deg, transparent 45%, #173222 46% 54%, transparent 55%);
-  filter: drop-shadow(0 0 45px rgba(60, 116, 78, 0.22));
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(5, 18, 12, 0.86) 0%,
+    rgba(5, 18, 12, 0.72) 48%,
+    rgba(5, 18, 12, 0.42) 100%);
 }
 
 .tree-scene__canvas {
   opacity: 0 !important;
+  filter: saturate(0.58);
   transition: opacity 900ms var(--ease-out);
 }
 
@@ -148,9 +146,11 @@
 }
 
 @media (max-width: 768px) {
-  .tree-scene__silhouette {
-    right: -110px;
-    opacity: 0.25;
+  .tree-scene::after {
+    background: linear-gradient(180deg,
+      rgba(5, 18, 12, 0.76),
+      rgba(5, 18, 12, 0.82) 50%,
+      rgba(5, 18, 12, 0.76));
   }
 
   .tree-scene__poster::before {

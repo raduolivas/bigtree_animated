@@ -50,7 +50,7 @@
 
 .method__step-description {
   font-size: var(--text-sm);
-  color: var(--color-text-muted);
+  color: #d0dbd3;
   line-height: var(--leading-relaxed);
 }
 

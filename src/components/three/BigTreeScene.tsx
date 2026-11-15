@@ -80,9 +80,7 @@ export function BigTreeScene() {
       className={`tree-scene ${sceneReady ? 'tree-scene--ready' : ''} ${sceneFailed ? 'tree-scene--static' : ''}`}
       aria-hidden="true"
     >
-      <div className="tree-scene__poster">
-        <div className="tree-scene__silhouette" />
-      </div>
+      <div className="tree-scene__poster" />
 
       {!sceneReady && !sceneFailed && (
         <div className="tree-scene__loading">

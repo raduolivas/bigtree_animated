@@ -44,10 +44,10 @@ export function TreeParticles({ gpuTier, mobile }: TreeParticlesProps) {
 
   useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y += delta * (0.012 + networkProgress * 0.045);
-      pointsRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.22) * 0.12;
+      pointsRef.current.rotation.y += delta * (0.006 + networkProgress * 0.009);
+      pointsRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.16) * 0.06;
     }
-    if (materialRef.current) materialRef.current.opacity = 0.18 + particleIntensity * 0.48;
+    if (materialRef.current) materialRef.current.opacity = 0.10 + particleIntensity * 0.16;
   });
 
   return (
@@ -67,7 +67,7 @@ export function TreeParticles({ gpuTier, mobile }: TreeParticlesProps) {
         size={0.05}
         vertexColors
         transparent
-        opacity={0.24}
+        opacity={0.12}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
       />
